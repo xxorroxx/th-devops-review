@@ -11,6 +11,7 @@ FROM openjdk:22-slim
 LABEL maintainer =  "German Sanchez <sanchezgerman@outlook.com>"
 
 LABEL company = "Dev&Fun Co."
+
 ** Metadatos clave-valor, en este caso se ingresan maintainer y company name.
 
 COPY target/us-core-vmc-1.0.0.jar /app/app.jar
