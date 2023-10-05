@@ -5,8 +5,8 @@ Antes de crear la imagen, explicaré cual es la logica utilizada en el Dockerfil
 
 ###### FROM openjdk:22-slim 
 Se invoca la imagen de openjdk 22, por dos razones principales:
-	1. El proyecto cuenta con una version de Java 20 lo cual se require una version igual o superior a la misma.
-	2. Se utilizó la version slim, reducida en tamaño y cuenta con todos los paquetes necesario e buenas practicas.
+1. El proyecto cuenta con una version de Java 20 lo cual se require una version igual o superior a la misma.
+2. Se utilizó la version slim, reducida en tamaño y cuenta con todos los paquetes necesario e buenas practicas.
 
 ###### LABEL maintainer =  "German Sanchez <sanchezgerman@outlook.com>"
 
