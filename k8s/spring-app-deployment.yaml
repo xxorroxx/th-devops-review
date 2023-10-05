@@ -1,0 +1,66 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: test-app 
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-app
+  namespace: test-app 
+spec:
+  selector:
+    matchLabels:
+      app: springboot-k8s
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: springboot-k8s
+    spec:
+      containers:
+        - name: spring-app
+          image: xxorroxx/us-core-vmc:1.0.2
+          ports:
+            - containerPort: 8080
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: svc-spring-app
+  namespace: test-app
+spec:
+  selector:
+    app: springboot-k8s
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: NodePort
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: spring-app-ingress
+  namespace: test-app
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: localhost
+    http:
+      paths:
+      - path: /
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: svc-spring-app
+            port:
+              number: 80

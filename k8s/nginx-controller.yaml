@@ -1,0 +1,126 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: nginx-ingress
+
+---
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: nginx-ingress 
+  namespace: nginx-ingress
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: default-server-secret
+  namespace: nginx-ingress
+type: kubernetes.io/tls
+data:
+  tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVBekNDQXV1Z0F3SUJBZ0lVRHQwM2xFR250eC8wci9SenU0NlNxNEdWQUtnd0RRWUpLb1pJaHZjTkFRRUwKQlFBd2daQXhDekFKQmdOVkJBWVRBa0ZTTVJBd0RnWURWUVFJREFkRGIzSmtiMkpoTVJBd0RnWURWUVFIREFkRApiM0prYjJKaE1SSXdFQVlEVlFRS0RBbFlja1JsZG1Wc2IzQXhEakFNQmdOVkJBc01CV2x1Wm5KaE1ROHdEUVlEClZRUUREQVpIWlhKdFlXNHhLREFtQmdrcWhraUc5dzBCQ1FFV0dYTmhibU5vWlhwblpYSnRZVzVBYjNWMGJHOXYKYXk1amIyMHdIaGNOTWpNd09UQTVNVGsxTmpRMVdoY05NalF3T1RBNE1UazFOalExV2pDQmtERUxNQWtHQTFVRQpCaE1DUVZJeEVEQU9CZ05WQkFnTUIwTnZjbVJ2WW1FeEVEQU9CZ05WQkFjTUIwTnZjbVJ2WW1FeEVqQVFCZ05WCkJBb01DVmh5UkdWMlpXeHZjREVPTUF3R0ExVUVDd3dGYVc1bWNtRXhEekFOQmdOVkJBTU1Ca2RsY20xaGJqRW8KTUNZR0NTcUdTSWIzRFFFSkFSWVpjMkZ1WTJobGVtZGxjbTFoYmtCdmRYUnNiMjlyTG1OdmJUQ0NBU0l3RFFZSgpLb1pJaHZjTkFRRUJCUUFEZ2dFUEFEQ0NBUW9DZ2dFQkFMcXVKejZ6aUhHQWhlVDdlRjMzOEx0aE5qazgzYUZOCnMxVmZFdXZ6SGxUSkt4VnBhTVUxNWtZTnNSQndxdWRMbmdSUUo5b3JOVCthNXJqVFhMTzAyVlNDZzR1N3hCQlAKaGlFWHhJK0VEck1wUzFVK3M5emIwTWRSbmVvNDY2TmtodTMyVjIrV0MyS3Z6T20rbWRWRGpTTXd4MHA4T1dpawp1dHFlVzJ0UHBnUmg0VHhjWnUxakdTZXdPS0Q0c3liNGN0aTN2Tzd1T2NYcGZIRWREeHR1K251T1ZoUTVnMWxxCkRnM2VBMk1KWnp6b0VkWHVwTklNZUFuTmkzWTRneWFLVHZ2ZWlJUlQxZ3huWUNLTGdSbVU1R1h1U0MvOTdaT1AKWkV6bmFERnA2L1BXVFBabzQwRmVXYm5kSE9oVEtMclBQOG1yTUt1WDdvZlBLSUZGRlcvYnJia0NBd0VBQWFOVApNRkV3SFFZRFZSME9CQllFRk9YUW9wdVlKcUpjeWM5c3M5NDViakRFV0F6Yk1COEdBMVVkSXdRWU1CYUFGT1hRCm9wdVlKcUpjeWM5c3M5NDViakRFV0F6Yk1BOEdBMVVkRXdFQi93UUZNQU1CQWY4d0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBQStpYytmNVlDR0VQaHVHWGVFU1RDa05oQ0xvZ3psaE4vRXd3VXVIUllsclN5TkRWMTNONXJmOAo3SkoxcVNRNGpEajk5dDl0ZEtjdnMxQzZZU29icFljN1NqNzk2ZEFIL0tLMDdwT2ZOUU1sSHBXZTlLbURkQUhVCm96VnJZUWtIM0Z2VUlUbjNiUnRXYTRCWTNUbW5LNTA1ekxldkJBdkZHL2VGaXRPM1p3ZUN0THgva0h1dnNXUDgKVCtrVjc2dzJ1STloN0ttV0RCQkkrV1JJc2h1bHk1aTkrWUMxekQ2dnVLUGxQU3NhbkVDcFRiWEtZTnc0MVdSVwp6Tmx0dUtmWVc1SWhUVGZ5bWw1ekNPQkJ3RWs2U2VtejBlT0FBTUFkWWExYVVQUERpcXhZMVdUTzEwMVh0VWYxClQ2TUduTW1VVHp3STh3QTdMV1RnTUVkcGZ6Q0NGL3M9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+  tls.key: LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUV2Z0lCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQktnd2dnU2tBZ0VBQW9JQkFRQzZyaWMrczRoeGdJWGsKKzNoZDkvQzdZVFk1UE4yaFRiTlZYeExyOHg1VXlTc1ZhV2pGTmVaR0RiRVFjS3JuUzU0RVVDZmFLelUvbXVhNAowMXl6dE5sVWdvT0x1OFFRVDRZaEY4U1BoQTZ6S1V0VlByUGMyOURIVVozcU9PdWpaSWJ0OWxkdmxndGlyOHpwCnZwblZRNDBqTU1kS2ZEbG9wTHJhbmx0clQ2WUVZZUU4WEdidFl4a25zRGlnK0xNbStITFl0N3p1N2puRjZYeHgKSFE4YmJ2cDdqbFlVT1lOWmFnNE4zZ05qQ1djODZCSFY3cVRTREhnSnpZdDJPSU1taWs3NzNvaUVVOVlNWjJBaQppNEVabE9SbDdrZ3YvZTJUajJSTTUyZ3hhZXZ6MWt6MmFPTkJYbG01M1J6b1V5aTZ6ei9KcXpDcmwrNkh6eWlCClJSVnYyNjI1QWdNQkFBRUNnZ0VBQVl2QWd5a2dsbzdrRFBaakFZREcxdHI1RnJHdXhMMVZqaUp1SW1YSnVQRXEKR2dkdkFmYUF1ejVhRVhMdFoySmRvdzRVQkI4MkRLeW1KRERUNUdtbklEbWF2MFVPWEhPbFI3U1hIRUcySVhPdgo4cnN5b0J0eWQ5K0RBb3pTWjk1cFk2TE12dGtacStUVDhTZVhWL1hGWTkya1FmNWRFc1V5ZEJKeEVlKzJmUFEzCmR4QUl6ZmdwaENQWUphWXpFZTlQT01oa0FYOGtjYU9wTmE0MTk1UkpxaTdFVGZoWGgyejNLLzQ3dnNHbTNWdGQKVVVnKzRUYklFYzUzRFFwN1p5dGd1T2tFNmZyaWVwNFdacElXanAxTUw5b2VhUFczYmUvZXhvRHozS2pvaTBYVQozeXNGSDFQc3I2T29WUnFTdVFWUGIwOEFFd2o5MTlJSG9WZnlPcFdadFFLQmdRQytXbThuekpqUFA0NitQbVI2CjgyYTdhWHBqeUhiejNQVDh4TEJ4STE0RHR0Y2xtRGswc1lUc1RrSFQ2ZmJmVkVYRnhqbWY4UHpsQk5MaWgyQkoKTEwvUjVVKzdmdzlsM2NBK3FlUUwwYzF3S0h2VHV2UHpmVFV1eFhwTXZvZ3BFMGd1clp4NVFKZm94V2cwc3lYUgpvUFhlY1h1QjVRWThPK0xKeFVxNGRWWHB6d0tCZ1FEN0QzSkRHaUo0WlR0SlRCeFdVN3hNVUg0QS9yU2ZYZlNSCjZLdmJVbklXU1ErQlJRdk1DVTNucmw3SkRQLzU3QWVxS2c4YTk1ZkRRcFpqbjUzYzRMRWlsbUJqS0VTeGd4Y00KOGV1Nk9OSVBYQmt0N3laLzhlUFFBUHYrMjVMU3d5SGxOVi84enVNa0kyWENMZ0xtd2ZaR3RGNFEzNG5OYURmVgpCZVh4MnBnNTl3S0JnUUNNNGkvc3UrL0pUQmdnMDlyWWFQZDY4L2xDaXVjSFhGenlDNzB2TDJid3hzMTdwS3VLClJXekUzTEs1M2lyNlpjdnlNZUVLY0hrc0k2TFZTQzdLV2RWcXl4WjFCZmhtZzNZNnF0RCtzbndqYThNaUZQZGoKR2lOWGg0OFo1OWFzMS9tUG1xejV6UVhob09HY1I0OVJGSm1FMW1iNzMzNzY2N1BSZERUMlN0bVlYd0tCZ0dENApNVmpyb2o3QVV1clhvK1pRQjEydWhVeWJGR2F0b29Zc3lSdzROdXFXbzQ5NWZMbjlLZ0wvWFlyb0k0S0RnTjVmCnlsL1BHK1lHTlJJYmw1eTFpSlZrWWF4SzVHVnZ6WnBwWW5RVitFU0lmUTA1M3JQeVdOeUJWTk8yT1hxQWRmb1MKNkpVN3o0Mm93bWdDMzRvRGhyeitjNHF1M0luaTVCVzZabnRJeEIwM0FvR0JBTEc3aThTUzcrc0h4TmkvRXpHawpvN0wxOEE0M2tEMDlFZGh4bkhOUnNuMnlLRDlUVUV6aXltU21YWlFiZmVkKzVLK3Z3Smx3RXRMd1pFQVIwMXVLClVZY2lPQkdnYTFXL2FHN29qUGVhMElnY0pQZ0JEYUR2S0owdGtya1BmRDdCY3R3S3hCMTBsVHdyamcxV0pPdG0KV0l1Y1lXTTQ4bWk0RW90elJvam5oakVlCi0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0K
+
+---
+
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: nginx-config
+  namespace: nginx-ingress
+data:
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  creationTimestamp: null
+  name: nginx-ingress-admin
+  namespace: nginx-ingress
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: nginx-ingress
+  namespace: nginx-ingress
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  name: nginx
+  # annotations:
+  #   ingressclass.kubernetes.io/is-default-class: "true"
+spec:
+  controller: nginx.org/ingress-controller
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-ingress
+  namespace: nginx-ingress
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-ingress
+  template:
+    metadata:
+      labels:
+        app: nginx-ingress
+    spec:
+      serviceAccountName: nginx-ingress
+      containers:
+      - image: nginx/nginx-ingress:edge
+        imagePullPolicy: Always
+        name: nginx-ingress
+        ports:
+        - name: http
+          containerPort: 80
+        - name: https
+          containerPort: 443
+        env:
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        args:
+          - -nginx-configmaps=$(POD_NAMESPACE)/nginx-config
+          - -default-server-tls-secret=$(POD_NAMESPACE)/default-server-secret
+          - -enable-custom-resources=false
+         #- -v=3 # Enables extensive logging. Useful for troubleshooting.
+         #- -report-ingress-status
+         #- -external-service=nginx-ingress
+         #- -enable-leader-election
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-ingress
+  namespace: nginx-ingress
+spec:
+  type: NodePort 
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30000
+    protocol: TCP
+    name: http
+  selector:
+    app: nginx-ingress
+
+
