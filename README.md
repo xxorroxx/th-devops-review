@@ -9,6 +9,7 @@ FROM openjdk:22-slim
 	2. Se utilizó la version slim, reducida en tamaño y cuenta con todos los paquetes necesario e buenas practicas.
 
 LABEL maintainer =  "German Sanchez <sanchezgerman@outlook.com>"
+
 LABEL company = "Dev&Fun Co."
 ** Metadatos clave-valor, en este caso se ingresan maintainer y company name.
 
