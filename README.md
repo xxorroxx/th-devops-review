@@ -4,36 +4,35 @@ En primera instancia, para poder generar una imagen a partir del codigo java pro
 Antes de crear la imagen, explicaré cual es la logica utilizada en el Dockerfile:
 
 FROM openjdk:22-slim 
-** Se invoca la imagen de openjdk 22, por dos razones principales:
+Se invoca la imagen de openjdk 22, por dos razones principales:
 	1. El proyecto cuenta con una version de Java 20 lo cual se require una version igual o superior a la misma.
 	2. Se utilizó la version slim, reducida en tamaño y cuenta con todos los paquetes necesario e buenas practicas.
 
 LABEL maintainer =  "German Sanchez <sanchezgerman@outlook.com>"
 
 LABEL company = "Dev&Fun Co."
-
-** Metadatos clave-valor, en este caso se ingresan maintainer y company name.
+Metadatos clave-valor, en este caso se ingresan maintainer y company name.
 
 COPY target/us-core-vmc-1.0.0.jar /app/app.jar
-** Se copia el .jar desde el path en donde se realizo el package y se copia al contenedor en el path especificado /app
+Se copia el .jar desde el path en donde se realizo el package y se copia al contenedor en el path especificado /app
 
 EXPOSE 8080
-** Se ingresa el valor del puerto que vamos a exponer.
+Se ingresa el valor del puerto que vamos a exponer.
 
 ENTRYPOINT ["java","-Dspring.profiles.active=prod", "-jar","/app/app.jar"]
-** Se ingresan los valores del punto de entrada de la aplicacion que se ejecutara junto al arranque de la misma.
+Se ingresan los valores del punto de entrada de la aplicacion que se ejecutara junto al arranque de la misma.
 Seleccionar el profile requerido para crear la imagen. Lo ideal es tener mas de una branch para tene los Dockerfiles individuales por cada environment.
 
 Una vez comprendido la estructura del Dockerfile se procede a su ejecucion. Situado en el mismo directorio, en consola se ingresa: 
 
 docker build -t us-core-vmc:1.0.2 .
-** Se realiza el build a partir del Dockerfile
+Se realiza el build a partir del Dockerfile
 
 docker tag us-core-vmc:1.0.2 xxorroxx/us-core-vmc:1.0.2 
-** Se tagea la imagen creada para poder ser pusheada a dockerhub, la misma tiene que matchear con el repositorio remoto.
+Se tagea la imagen creada para poder ser pusheada a dockerhub, la misma tiene que matchear con el repositorio remoto.
 
 docker push xxorroxx/us-core-vmc:1.0.2
-** Se realiza el push con la imagen previamente tageada, de esta manera queda disponibilizada para ser pulleada.
+Se realiza el push con la imagen previamente tageada, de esta manera queda disponibilizada para ser pulleada.
 
 
 
