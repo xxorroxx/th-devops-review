@@ -20,8 +20,7 @@ EXPOSE 8080
 
 ENTRYPOINT ["java","-Dspring.profiles.active=prod", "-jar","/app/app.jar"]
 ** Se ingresan los valores del punto de entrada de la aplicacion que se ejecutara junto al arranque de la misma.
-# Seleccionar el profile requerido para crear la imagen. Lo ideal es tener mas de una branch para tener
-# los Dockerfiles individuales por cada environment.
+Seleccionar el profile requerido para crear la imagen. Lo ideal es tener mas de una branch para tene los Dockerfiles individuales por cada environment.
 
 Una vez comprendido la estructura del Dockerfile se procede a su ejecucion. Situado en el mismo directorio, en consola se ingresa: 
 
