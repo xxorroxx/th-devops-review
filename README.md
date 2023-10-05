@@ -43,7 +43,9 @@ Para este proceso se dividio el proyecto en dos partes:
 
 Se disponibizan de esta manera ya que nginx no es parte de la aplicacion, pero es necesario para poder ingresar a ella desde un navegador. Para ello se crearán dos namespaces.
 Los manifiestos tienen la particularidad de disponibilizar todos los objetos del proyecto en un solo archivo, la cual facilita su aplicacion al cluster con un solo comando para "deployar" todo a la vez.
-Tener en cuenta en que cluster estoy parado en el momento de ejecutar el commando, ya que no seria buena practica tener un proyecto de desarrollo en un cluster productivo. Una vez validado esto, situados en el mismo directorio en donde estan los .yaml se procede mediante interaccion de la consola el comando:
+
+Tener en cuenta en que cluster estoy "parado" en el momento de ejecutar el commando, ya que no seria buena practica tener un proyecto de desarrollo en un cluster productivo. Una vez validado esto, situados en el mismo directorio en donde estan los .yaml se procede mediante interaccion de la consola el comando:
+
 kubectl apply -f path/al/archivo
 
 En esta ocasion se realizo un archivo ejecutable .bat (windows) para que todos los objetos (nginx y aplicacion) se disponibilicen en kubernetes de manera automatica, incluyendo la creacion de los namespaces y objetos en su lugar.
