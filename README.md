@@ -39,8 +39,8 @@ Se realiza el push con la imagen previamente tageada, de esta manera queda dispo
 # Proceso de como aplicar el manifiesto en kubernetes
 
 Para este proceso se dividio el proyecto en dos partes:
-	1. nginx-controller
-	2. aplicacion spring boot
+* Nginx-controller
+* Aplicacion spring boot
 
 Se disponibizan de esta manera ya que nginx no es parte de la aplicacion, pero es necesario para poder ingresar a ella desde un navegador. Para ello se crearán dos namespaces.
 Los manifiestos tienen la particularidad de disponibilizar todos los objetos del proyecto en un solo archivo, la cual facilita su aplicacion al cluster con un solo comando para "deployar" todo a la vez.
