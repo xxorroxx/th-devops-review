@@ -25,13 +25,13 @@ Seleccionar el profile requerido para crear la imagen. Lo ideal es tener mas de 
 
 Una vez comprendido la estructura del Dockerfile se procede a su ejecucion. Situado en el mismo directorio, en consola se ingresa: 
 
-docker build -t us-core-vmc:1.0.2 .
+###### docker build -t us-core-vmc:1.0.2 .
 Se realiza el build a partir del Dockerfile
 
-docker tag us-core-vmc:1.0.2 xxorroxx/us-core-vmc:1.0.2 
+###### docker tag us-core-vmc:1.0.2 xxorroxx/us-core-vmc:1.0.2 
 Se tagea la imagen creada para poder ser pusheada a dockerhub, la misma tiene que matchear con el repositorio remoto.
 
-docker push xxorroxx/us-core-vmc:1.0.2
+###### docker push xxorroxx/us-core-vmc:1.0.2
 Se realiza el push con la imagen previamente tageada, de esta manera queda disponibilizada para ser pulleada.
 
 
@@ -47,7 +47,7 @@ Los manifiestos tienen la particularidad de disponibilizar todos los objetos del
 
 Tener en cuenta en que cluster estoy "parado" en el momento de ejecutar el commando, ya que no seria buena practica tener un proyecto de desarrollo en un cluster productivo. Una vez validado esto, situados en el mismo directorio en donde estan los .yaml se procede mediante interaccion de la consola el comando:
 
-kubectl apply -f path/al/archivo
+###### kubectl apply -f path/al/archivo
 
 En esta ocasion se realizo un archivo ejecutable .bat (windows) para que todos los objetos (nginx y aplicacion) se disponibilicen en kubernetes de manera automatica, incluyendo la creacion de los namespaces y objetos en su lugar.
 
