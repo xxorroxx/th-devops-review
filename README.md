@@ -51,3 +51,5 @@ Tener en cuenta en que cluster estoy "parado" en el momento de ejecutar el comma
 
 En esta ocasion se realizo un archivo ejecutable .bat (windows) para que todos los objetos (nginx y aplicacion) se disponibilicen en kubernetes de manera automatica, incluyendo la creacion de los namespaces y objetos en su lugar.
 
+En esta prueba, la configuracion para disponibilizar la aplicacion, se logra visualizar mediante localhost:30000
+
